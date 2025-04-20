@@ -24,7 +24,7 @@ export default function TransitionLink({
 		const body = document.body;
 
 		body.classList.add("exit-animation");
-		await new Promise((res) => setTimeout(res, 1000));
+		await new Promise((res) => setTimeout(res, 500));
 		body.classList.remove("exit-animation");
 
 		router.push(href);
