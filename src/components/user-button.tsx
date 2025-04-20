@@ -1,14 +1,15 @@
 "use client";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
 
 import { useSession, signIn, signOut } from "next-auth/react";
+import { Button } from "./ui/button";
 
 function getFirstTwoCapitalLetters(str?: string | null) {
   const match = (str ?? "").match(/[A-Z]/g);
@@ -20,26 +21,29 @@ export default function UserButton() {
 
   return (
     <div>
-      {status === "authenticated" && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+      {status === "authenticated" && (<div>
+        {/* <DropdownMenu>
+          <DropdownMenuTrigger asChild> */}
             <Avatar>
               <AvatarImage src={session?.user?.image!} />
               <AvatarFallback>
                 {getFirstTwoCapitalLetters(session?.user?.name)}
               </AvatarFallback>
             </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem
+           {/* </DropdownMenuTrigger>
+           <DropdownMenuContent>
+             <DropdownMenuItem */}
+            <Button
               onClick={() => {
                 signOut();
               }}
             >
               Sign Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              </Button>
+            {/* </DropdownMenuItem>
+          </DropdownMenuContent> 
+        </DropdownMenu>*/}
+        </div>
       )}
       {status === "unauthenticated" && (
         <button
