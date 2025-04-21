@@ -4,9 +4,6 @@ import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  session: {
-    strategy: 'jwt'
-  },
   providers: [
     GitHub,Google({
       authorization: {
@@ -62,4 +59,20 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async session({ session, token }) {
+      session.user.id = token.sub as string;
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
+  },
 })
