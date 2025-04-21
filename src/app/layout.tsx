@@ -30,8 +30,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
-        {children}
-        <Header />
+          {children}
+          <Header />
         </SessionProvider>
       </body>
     </html>
